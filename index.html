@@ -12,12 +12,7 @@
                 //Gets height & width from viewport
                 var viewportHeight = document.documentElement.clientHeight;
                 var viewportWidth = document.documentElement.clientWidth;
-                                
-                $(".door").click(function(){
-                    $(".door").toggleClass("doorOpen");
-                });
-
-                
+                            
             });
         </script> 
         <style>
@@ -26,104 +21,12 @@
                 height: 100%;
                 margin:0;
                 padding: 0;
-                /*background:url(images/cPaper_darkgrey.jpg);*/
             }
-            
-            #container{
-                display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
-            }
-            
-            #num_pad{  
-                display: flex;
-                height: auto;
-                width: 45vw;  
-            }   
-            
-            
-
-
-
-
-
-
-            #door_div{
-                display: flex;
-                width: 45vw;
-                height: auto;
-            }
-            
-            .backDoor
-            {
-              background-color: #333;
-              position:relative;
-              width:200px;
-              height:300px;
-              margin: 0 auto;
-              margin-top:50px;
-            }
-
-            .door
-            {
-              background-color: brown;
-              position:absolute;
-              top:0px;
-              left:0px;
-              width:200px;
-              height:300px;
-
-              transform-origin: left;
-              /*Speed of the Door animation*/
-              transition: all 0.5s ease-in-out;
-            }
-
-            .doorOpen
-            {
-              /*prespectiv creates the door open effect*/
-              transform: perspective(1200px) translateZ(0px) translateX(0px) translateY(0px) rotateY(-105deg);
-            }
-
-            
-            
     </style>
     </head>
     <body>
         <div id="container">
-            <div>
-                <div>
-                    <div id=num_pad>
-                       <table id="numpad_tbl">
-                            <tr>
-                                <td class="numpad_btn"><button class="numpad_label">7</button></td>
-                                <td class="numpad_btn"><button class="numpad_label">8</button></td>
-                                <td class="numpad_btn"><button class="numpad_label">9</button></td>
-                           </tr>
-                           <tr>
-                                <td class="numpad_btn"><button class="numpad_label">4</button></td>
-                                <td class="numpad_btn"><button class="numpad_label">5</button></td>
-                                <td class="numpad_btn"><button class="numpad_label">6</button></td>
-                           </tr>
-                           <tr>
-                                <td class="numpad_btn"><button class="numpad_label">1</button></td>
-                                <td class="numpad_btn"><button class="numpad_label">2</button></td>
-                                <td class="numpad_btn"><button class="numpad_label">3</button></td>
-                           </tr>
-                           <tr>
-                                <td class="numpad_btn"><button class="numpad_label">Clear</button></td>
-                                <td class="numpad_btn"><button class="numpad_label">Enter</button></td>
-                           </tr>
-                        </table>  
-                    </div>
-                </div>
-                <div class="door_div">
-                    <div class="backDoor">
-                      <div class="door">
-                        <p id="room_name">302</p>
-                      </div>
-                    </div>
-                </div>
-            </div>
+           <p>Empty</p>
         </div>
         <div id="footer">
             
