@@ -1,0 +1,213 @@
+PHP snippets
+
+*****Connection vairables*****
+$servername = "localhost";
+$username = " ";
+$password = " ";
+$database = " ";
+
+
+
+*****Create Connection******
+$conn = new mysqli($servername, $username, $password, $database);
+
+
+
+******Close connection********
+$conn->close();
+
+ 
+*******Check connection*******
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+echo "Connected successfully";
+
+
+******Accept variables from form**********
+$varname=$_POST['varname'];
+
+
+**********Execute query**********
+mysqli_query($conn, "sql statement - values('$varname')");
+
+
+*********PHP redirect********
+header("location: some-page.html");
+exit();
+
+
+
+***********Check if query returns a row**********(use for login)
+if(isset($_POST['submit'])){
+    $varname=$_POST['varname1'];
+    $varname=$_POST['varname2'];
+
+    $result=mysqli_query($conn, "SELECT * FROM `table_name` WHERE field='$varname1' and field ='$varname2';");
+        
+    $row = $result->fetch_assoc();
+    
+    if($row == 1)
+    {
+        echo "true"
+    }
+    else
+    {
+        echo "false"
+    }
+}
+
+
+*************Returns value from DB using index********************
+$result=mysqli_query($conn, "sql statement - values('$varname')");
+
+$row = mysqli_fetch_array($result);
+
+if(mysqli_num_rows($result)!=0)
+{
+    //if db returns a value
+    echo $row['Col_NAME'];
+}
+else
+{
+    echo "problem" ;
+}
+ 
+mysqli_close($conn);
+
+JQUERY snips
+
+*********Clock***********
+function getdate(){
+                    var today = new Date();
+                    var h = today.getHours();
+                    var m = today.getMinutes();
+                    var s = today.getSeconds();
+                     if(s<10){
+                         s = "0"+s;
+                     }
+                     if (m < 10) {
+                        m = "0" + m;
+                    }
+                    $("#time").text(h+":"+m+":"+s);
+                     setTimeout(function(){getdate()}, 500);
+                }
+                
+                getdate();
+
+
+*********Date**********
+var tdy = new Date()
+                var actualmnth = tdy.getUTCMonth()+1;
+                var tdydt = tdy.getDate() + "/" + actualmnth + "/" + tdy.getFullYear();
+                $("#date").html(tdydt);
+                
+                var weekday = new Array(7);
+                      weekday[0] = "Sunday";
+                      weekday[1] = "Monday";
+                      weekday[2] = "Tuesday";
+                      weekday[3] = "Wednesday";
+                      weekday[4] = "Thursday";
+                      weekday[5] = "Friday";
+                      weekday[6] = "Saturday";
+                var dyfrtdy = weekday[tdy.getDay()];;
+                $("#daystring").html(dyfrtdy);
+
+
+
+*******Submitting a form with AJAX**********
+$("#btnSubmit").click(function (event) {
+                    event.preventDefault();
+                    
+                    var ev_time=$("#ev-time").val();
+                    var ev_name=$("#ev-name").val();
+                    var ev_date=toString($("#ev-date").val());
+                    var ev_loco=$("#ev-loco").val();
+                    var ev_det=$("#ev-det").val();
+                    var ev_poster=$("#ev-poster").val();
+                    var ev_creator=sessionStorage.getItem("ID");
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "event-process.php",
+                        data:{
+                                'ev_name': ev-name,
+                                'ev_time': ev-time,
+                                'ev_date': ev-date,
+                                'ev_loco': ev-loco,
+                                'ev_det': ev-det,
+                                'ev_poster': ev-poster,
+                                'ev_creator': ev-creator
+                             }
+                    });
+                    alert("Form submitted successfully");
+
+
+*********Submit form with Jquery**********
+ $("form").submit(function(event) {
+                    event.preventDefault();
+                    var login_ID = $("#login_ID").val(); 
+                    var login_password = $("#login_password").val(); 
+                    var submit = $("#submit").val(); 
+                    log_success = $("#container").load("login-process.php",{
+                        login_ID: login_ID,
+                        login_password: login_password,
+                        submit: submit
+                    });
+                    
+
+*************Load items from DB and pagination***************
+var curnt_page = 1;
+                var prv_page = 1;
+                var x=0;
+                var i=0;
+                var total_events;
+                var total_page;
+                var panel_cntr= 0;
+                var page_type = "event";
+                var ev_res = {};
+                $("#page_num").html(curnt_page);
+                
+                //initial event load
+                $.getJSON("/event-load.php",{page_type:page_type},function(data){
+                    total_events = Object.keys(data).length;
+                    console.log("total number of events are " + total_events);
+                    
+                    var tp = total_events/4;
+                    total_page = Math.ceil(tp);
+                    console.log("total number of pages are " + total_page);
+                    $("#page_ttl").html(total_page);
+                    
+                    
+                    $.getJSON("/event-load.php",{page_type:page_type},function(data){
+                        ev_res = jQuery.makeArray(data);
+                        //console.log(ev_res);
+                        
+                        while(x<4){
+                            $("#evntname"+i).html(ev_res[i].EVENT_NAME);
+                            $("#evnttime"+i).html(ev_res[i].EVENT_TIME);
+                            $("#evntdate"+i).html(ev_res[i].EVENT_DATE);
+                            $("#location"+i).html(ev_res[i].LOCATION);
+                            $("#detail"+i).html(ev_res[i].DESCRIPTION);   
+                            i++;
+                            x++;   
+                        }
+                        x=0;
+                    }); 
+                }); 
+
+
+************Online check*****************
+function onlineChck(){
+                   setTimeout(function(){if(navigator.onLine == true)
+                        {
+                           $("#message").html("You are online!");
+                           setTimeout(function(){window.location.replace("home.html");},500)
+                           setTimeout(changeOut(),2000);
+                            
+                        }
+                        else
+                        {
+                           $("#message").html("you are not online! Your need internet access to use this app")        
+                        };},3000)      
+                }
