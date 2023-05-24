@@ -1,0 +1,16 @@
+----swatches----
+#28CC30 - green - rgba(40, 204, 48, 1)
+
+#228b22 - forrest green - (34,139,34,1)
+
+#D3D3D3 - darkgray - rgba (211,211,211,1)
+-----fonts------
+
+Segoe UI
+                 
+-----border testing-----                  
+ {
+ border: darkgrey;
+ border-style: solid;
+ border-width: thin;
+}
